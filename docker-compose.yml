@@ -1,0 +1,13 @@
+version: '3'
+services:
+  server:
+    build: ./server
+    image: chat-server
+    ports:
+            - 8999:8999
+  client:
+    build: ./client
+    image: chat-client
+    network_mode: host
+    ports:
+            - 4200:4200

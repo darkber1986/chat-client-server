@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="header">
+    <h2>Total: {{ total }}</h2>
+    <mat-form-field>
+	    <!--<input matInput placeholder="Nickname" type="text" [(ngModel)]="sender" value="{{ sender }}" [ngModelOptions]="{updateOn: 'blur'}">-->
+      <input matInput placeholder="Nickname" type="text" value="{{ sender }}" [ngModelOptions]="{updateOn: 'blur'}">
+    </mat-form-field>
+  </div>
+  <div #viewer class="body">
+    <div class="viewer">
+      <div class="message" *ngFor="let msg of serverMessages" [ngClass]="{'bold': msg.isBroadcast, 'others': isMine(msg)}">
+        <div class="badge" [style.backgroundColor]="getSenderColor(msg.sender)">{{ getSenderInitials(msg.sender) }}</div>
+        <div class="content" [ngClass]="{'bold': msg.isBroadcast, 'others': isMine(msg)}">
+          <span>{{ msg.content }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!!sender" class="footer">
+    <form (submit)="send()">
+      <mat-form-field>
+        <input name="clientMessage" matInput placeholder="Write a message" type="text" [(ngModel)]="clientMessage">
+      </mat-form-field>
+      <button mat-fab type="submit">
+        <i class="material-icons">send</i>
+      </button>
+    </form>
+  </div>
+</div>
